@@ -12,7 +12,7 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: HomeView },
     { path: '/daftar', name: 'daftar', component: DaftarView },
-    { path: '/masuk', name: 'masuk', component: MasukView },
+    { path: '/masuk', name: 'masuk', component: MasukView, beforeEnter: (to, from) => { return true } },
     { path: '/dashboard', name: 'dashboard', component: DashboardView },
     { path: '/dashboard/sekolah', name: 'dashboard.sekolah.main', component: SekolahMainView },
     { path: '/dashboard/user', name: 'dashboard.user.main', component: UserMainView },

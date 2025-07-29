@@ -15,6 +15,7 @@ const verrors = reactive({
   email: '',
   username: '',
   password: '',
+  password_confirmation: '',
   role: '',
   status: ''
 });
@@ -29,6 +30,7 @@ const phone = ref('');
 const email = ref('');
 const username = ref('');
 const password = ref('');
+const password_confirmation = ref('');
 const role = ref('');
 const status = ref('');
 </script>
@@ -77,6 +79,48 @@ const status = ref('');
         <div class="col-sm-3">
           <Datepicker v-model="dateOfBirth" format="yyyy-MM-dd" :enable-time-picker="false" />
           <div class="invalid-feedback">{{ verrors.dateOfBirth }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" v-model="address">
+          <div class="invalid-feedback">{{ verrors.address }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Phone</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" v-model="phone">
+          <div class="invalid-feedback">{{ verrors.phone }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" v-model="email">
+          <div class="invalid-feedback">{{ verrors.email }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" v-model="username">
+          <div class="invalid-feedback">{{ verrors.username }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-4">
+          <input type="password" class="form-control" v-model="password">
+          <div class="invalid-feedback">{{ verrors.password }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Konfirmasi password</label>
+        <div class="col-sm-4">
+          <input type="password" class="form-control" v-model="password_confirmation">
+          <div class="invalid-feedback">{{ verrors.password_confirmation }}</div>
         </div>
       </div>
     </div>
