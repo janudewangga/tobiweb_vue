@@ -1,6 +1,20 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import TopNav from './component/TopNav.vue';
+import { useUserStore } from './stores/user';
+import { onMounted } from 'vue';
+import axios from 'axios';
+const userStore = useUserStore();
+onMounted(async () => {
+  if (localStorage.getItem('token')) {
+    try {
+      const response = await axios.get('/user/get_data');
+      userStore.setUserData(response.data);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+})
 </script>
 <template>
   <TopNav />

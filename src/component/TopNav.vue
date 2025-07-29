@@ -1,3 +1,13 @@
+<script setup>
+import router from '@/router';
+import { useUserStore } from '@/stores/user';
+const userStore = useUserStore();
+async function doLogout () {
+  localStorage.removeItem('token');
+  userStore.setUserData(null);
+  router.push({ name: 'masuk' });
+}
+</script>
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
@@ -10,8 +20,25 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/">Home</RouterLink>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-show="!userStore.userData">
             <RouterLink class="nav-link" to="/masuk">Masuk</RouterLink>
+          </li>
+          <li class="nav-item" v-show="userStore.userData">
+            <RouterLink class="nav-link" to="/dashboard">Dashboard</RouterLink>
+          </li>
+          <li class="nav-item" v-show="userStore.userData && ['administrator'].indexOf(userStore.userData.role) > -1">
+            <RouterLink class="nav-link" :to="{ name: 'dashboard.sekolah.main' }">Sekolah</RouterLink>
+          </li>
+          <li class="nav-item" v-show="userStore.userData && ['superadmin'].indexOf(userStore.userData.role) > -1">
+            <RouterLink class="nav-link" :to="{ name: 'dashboard.user.main' }">User</RouterLink>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item" v-show="userStore.userData">
+            <a class="nav-link text-danger" href="#" @click="doLogout">Keluar</a>
+          </li>
+          <li class="nav-item" v-show="!userStore.userData">
+            <RouterLink class="nav-link" to="/daftar">Daftar</RouterLink>
           </li>
         </ul>
       </div>
