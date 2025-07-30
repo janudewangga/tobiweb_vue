@@ -2,6 +2,11 @@
   font-family: 'Fira Sans', sans-serif;
 }
 
+.breadcrumb-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .fira-sans-thin {
   font-family: "Fira Sans", sans-serif;
   font-weight: 100;

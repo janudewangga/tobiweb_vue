@@ -1,7 +1,7 @@
 <script setup>
 import router from '@/router';
 import axios from 'axios';
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
 const userStore = useUserStore();
 const verrors = reactive({
@@ -28,14 +28,18 @@ async function doSubmit () {
     try {
       const response = await axios.post('/user/get_token', {
         username: username.value,
-        password: password.value
+        password: password.value,
       });
-      // console.log(response.data);
       localStorage.setItem('token', response.data.token);
       userStore.setUserData(response.data.user);
+      // userStore.setTokenData(response.data.token);
       router.push({ name: 'dashboard' });
+      // window.location.href = '/dashboard';
     } catch (error) {
-      alert(error.message);
+      if (error.status === 401) {
+        verrors.error = 'Username atau password salah.';
+        password.value = '';
+      }
     }
   }
 }

@@ -1,18 +1,18 @@
 <script setup>
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import LabelRole from '@/component/LabelRole.vue';
 const userStore = useUserStore();
 const users = ref([]);
 async function loadUsers () {
   try {
-    const response = await axios.get('/user');
+    const response = await axios.get('/user', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
     users.value = await response.data;
-    // console.log(users);
-    // response.data.forEach(function (dt) {
-    //   users.value.push(dt);
-    // });
   } catch (error) {
     users.value = [];
     alert(error.message);

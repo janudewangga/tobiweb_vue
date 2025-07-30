@@ -1,7 +1,9 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { useUserStore } from '@/stores/user';
+const userStore = useUserStore();
 const verrors = reactive({
   error: '',
   typeOfIdentity: '',
@@ -33,11 +35,26 @@ const password = ref('');
 const password_confirmation = ref('');
 const role = ref('');
 const status = ref('');
+const allowedRoles = ref([]);
+onMounted(() => {
+  console.log(userStore.userData);
+})
 </script>
 <template>
   <h1>Tambah user</h1>
   <div class="card">
     <div class="card-body">
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Akses</label>
+        <div class="col-sm-3">
+          <select name="role" :class="['form-control', verrors.role ? 'is-invalid' : '']" v-model="role">
+            <option value="administrator" v-show="['superadmin'].indexOf(userStore.userData.role) > -1">ADMINISTRATOR</option>
+            <option value="operator" v-show="['administrator'].indexOf(userStore.userData.role) > -1">OPERATOR</option>
+            <option value="school" v-show="['administrator', 'operator'].indexOf(userStore.userData.role) > -1">SEKOLAH</option>
+          </select>
+          <div class="invalid-feedback">{{ verrors.typeOfIdentity }}</div>
+        </div>
+      </div>
       <div class="row mb-3">
         <label class="col-sm-2 col-form-label">Tipe identitas</label>
         <div class="col-sm-3">
