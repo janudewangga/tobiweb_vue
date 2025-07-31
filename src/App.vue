@@ -23,7 +23,7 @@ const userStore = useUserStore();
   <div class="container mt-3">
     <div class="row">
       <div class="col">
-        <pre class="text-end">{{ JSON.stringify(userStore.userData) }}</pre>
+        <!-- <pre class="text-end">{{ JSON.stringify(userStore.userData) }}</pre> -->
         <!-- <BreadCrumb :breadcrumbs="[{ text: 'Test1', link: '/dashboard' }, { text: 'Link2', link: null }]" /> -->
         <RouterView></RouterView>
       </div>

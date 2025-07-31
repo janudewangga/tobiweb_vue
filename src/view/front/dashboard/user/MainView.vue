@@ -39,7 +39,9 @@ onMounted(() => {
       </thead>
       <tbody>
         <tr v-for="obj in users" :key="obj.id">
-          <td>{{ obj.name }}</td>
+          <td>
+            <RouterLink :to="{ name: 'dashboard.user.lihat', params: { id: obj.id } }">{{ obj.name }}</RouterLink>
+          </td>
           <td>{{ obj.phone }}</td>
           <td>
             <LabelRole :role="obj.role"></LabelRole>
